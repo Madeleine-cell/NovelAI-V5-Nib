@@ -1,0 +1,38 @@
+{
+  "manifest_version": 3,
+  "name": "Nib",
+  "version": "1.9.0",
+  "description": "NovelAI Diffusion V5 프롬프트 라이브러리 — 작가 태그, 캐릭터 외형, 화풍, 씬을 분류해 한 번의 클릭으로 넣고 뺍니다.",
+  "permissions": ["storage", "sidePanel", "unlimitedStorage", "scripting"],
+  "host_permissions": ["https://novelai.net/*"],
+  "background": { "service_worker": "background.js" },
+  "action": {
+    "default_title": "Nib — 프롬프트 라이브러리",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "32": "icons/icon32.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "icons": {
+    "16": "icons/icon16.png",
+    "32": "icons/icon32.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "side_panel": { "default_path": "sidepanel.html" },
+  "content_scripts": [
+    {
+      "matches": ["https://novelai.net/*"],
+      "js": ["shared-ui.js", "content.js", "overlay.js", "editor.js", "queue.js", "cleaner.js", "viewer.js"],
+      "run_at": "document_idle"
+    },
+    {
+      "matches": ["https://novelai.net/*"],
+      "js": ["page.js"],
+      "run_at": "document_idle",
+      "world": "MAIN"
+    }
+  ]
+}
